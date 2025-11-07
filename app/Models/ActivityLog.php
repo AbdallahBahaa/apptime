@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ActivityLog extends Model
+{
+    protected $fillable = [
+        'user_id',
+        'action',
+        'model',
+        'record_id',
+        'timestamp',
+        'ip_address',
+        'user_agent',
+        'device_info',
+    ];
+
+    protected $casts = [
+        'timestamp' => 'datetime',
+        'device_info' => 'array',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+}
