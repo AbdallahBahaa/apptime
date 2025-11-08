@@ -37,6 +37,30 @@ class SettingsController extends Controller
         ]);
     }
 
+    public function getUserSettings()
+    {
+        $user = auth()->user();
+        return response()->json([
+            'idle_timeout' => $user->idle_timeout ?? 30,
+            'email_notifications' => $user->email_notifications ?? true,
+            'theme' => $user->theme ?? 'light'
+        ]);
+    }
+
+    public function updateUserSettings(Request $request)
+    {
+        $request->validate([
+            'idle_timeout' => 'integer|min:5|max:3600',
+            'email_notifications' => 'boolean',
+            'theme' => 'in:light,dark,auto'
+        ]);
+
+        $user = auth()->user();
+        $user->update($request->only(['idle_timeout', 'email_notifications', 'theme']));
+
+        return response()->json(['message' => 'Settings updated successfully']);
+    }
+
     public function logIdle(Request $request)
     {
         $request->validate([

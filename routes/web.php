@@ -25,6 +25,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/api/user/idle-timeout', [SettingsController::class, 'getIdleTimeout'])->name('api.user.idle.timeout');
     Route::post('/api/log-idle', [SettingsController::class, 'logIdle'])->name('api.log.idle');
     Route::post('/api/apply-penalty-logout', [SettingsController::class, 'applyPenaltyAndLogout'])->name('api.apply.penalty.logout');
+
+    // User settings API
+    Route::get('/api/user/settings', [SettingsController::class, 'getUserSettings'])->name('api.user.settings');
+    Route::put('/api/user/settings', [SettingsController::class, 'updateUserSettings'])->name('api.user.settings.update');
 });
 
 // Admin routes

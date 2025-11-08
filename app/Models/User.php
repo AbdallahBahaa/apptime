@@ -23,6 +23,8 @@ class User extends Authenticatable
         'password',
         'idle_timeout',
         'role',
+        'email_notifications',
+        'theme',
     ];
 
     /**
